@@ -51,7 +51,23 @@ class ConsumptionEntryList extends StatelessWidget {
                   subtitle: Text('${entry.date}'),
                   trailing: Icon(Icons.delete_sweep),
                 ),
-                onDismissed: (direction) =>
+                confirmDismiss: (_) => showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    var nav = Navigator.of(context);
+                    return AlertDialog(
+                      title: Text('Delete entry?'),
+                      actions: [
+                        FlatButton(
+                            child: Text('No'), onPressed: () => nav.pop(false)),
+                        FlatButton(
+                            child: Text('Yes'), onPressed: () => nav.pop(true)),
+                      ],
+                    );
+                  },
+                ),
+                onDismissed: (_) =>
                     BlocProvider.of<ConsumptionEntryCubit>(context)
                         .deleteEntry(entry),
                 direction: DismissDirection.endToStart,

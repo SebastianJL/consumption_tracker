@@ -11,7 +11,7 @@ void main() {
 }
 
 class ConsumptionTracker extends StatelessWidget {
-  var _firebaseInit = Firebase.initializeApp();
+  final _firebaseInit = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {

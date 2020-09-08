@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:collection';
 
-//import 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consumption_tracker/src/consumption_entry.dart';
@@ -11,7 +10,10 @@ part 'consumption_entry_state.dart';
 
 class ConsumptionEntryCubit extends Cubit<ConsumptionEntryState> {
   ConsumptionEntryCubit() : super(ConsumptionEntryInitial()) {
-    firestore.collection('consumptionEntries').snapshots().listen(
+    _consumptionEntries
+        .orderBy('distance', descending: true)
+        .snapshots()
+        .listen(
       (QuerySnapshot event) {
         List<ConsumptionEntry> entries = event.docs
             .map((QueryDocumentSnapshot element) =>
@@ -24,35 +26,14 @@ class ConsumptionEntryCubit extends Cubit<ConsumptionEntryState> {
     );
   }
 
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final CollectionReference _consumptionEntries =
+      FirebaseFirestore.instance.collection('consumptionEntries');
 
-  List<ConsumptionEntry> all() => UnmodifiableListView([
-        ConsumptionEntry(
-          distance: 0,
-          volume: 0,
-          petrolPrice: 0,
-        )
-      ]);
-
-  addEntry(ConsumptionEntry entry) {
-//    _consumptionEntries.add(entry);
-//    ConsumptionEntryData(entries);
-    print('add entries');
+  Future<void> addEntry(ConsumptionEntry entry) {
+    return _consumptionEntries.add(entry.toDocument());
   }
 
-  deleteEntry(ConsumptionEntry entry) {
-//    _consumptionEntries.remove(entry);
-//    ConsumptionEntryData(entries);
-    print('remove entries');
+  Future<void> deleteEntry(ConsumptionEntry entry) {
+    return _consumptionEntries.doc(entry.id).delete();
   }
-
-//  emitEntries(List<ConsumptionEntry> entries) {
-//    _entriesController.add(UnmodifiableListView(entries));
-//  }
-
-//  @override
-//  Future<void> close() {
-//    _entriesController.close();
-//    return super.close();
-//  }
 }

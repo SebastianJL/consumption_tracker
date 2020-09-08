@@ -13,8 +13,6 @@ class ChartsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ConsumptionEntryCubit consumptionEntryCubit =
-        BlocProvider.of<ConsumptionEntryCubit>(context);
     return Padding(
       padding:
           const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
@@ -79,7 +77,7 @@ class ChartsTab extends StatelessWidget {
           border: Border.all(color: const Color(0xff37434d), width: 1)),
 //      minX: 0,
 //      maxX: 11,
-//      minY: 0,
+      minY: 0,
 //      maxY: 6,
       lineBarsData: [
         LineChartBarData(

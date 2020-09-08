@@ -64,8 +64,8 @@ class ConsumptionEntryFormState extends State<ConsumptionEntryForm> {
                   if (state.validate()) {
                     state.save();
                     var entry = ConsumptionEntry(
-                      kilometers: _entry['km'],
-                      litres: _entry['L'],
+                      distance: _entry['km'],
+                      volume: _entry['L'],
                       petrolPrice: _entry['Fr'],
                       date: _entry['date'],
                     );

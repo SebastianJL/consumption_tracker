@@ -3,6 +3,7 @@ import 'dart:collection';
 
 //import 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:consumption_tracker/src/consumption_entry.dart';
 import 'package:meta/meta.dart';
 
@@ -10,40 +11,48 @@ part 'consumption_entry_state.dart';
 
 class ConsumptionEntryCubit extends Cubit<ConsumptionEntryState> {
   ConsumptionEntryCubit() : super(ConsumptionEntryInitial()) {
-    _entriesController.add(_consumptionEntries);
+    firestore.collection('consumptionEntries').snapshots().listen(
+      (QuerySnapshot event) {
+        List<ConsumptionEntry> entries = event.docs
+            .map((QueryDocumentSnapshot element) =>
+                ConsumptionEntry.fromSnapshot(element))
+            .toList();
+        emit(ConsumptionEntryData(entries));
+      },
+      onError: (Object error) => emit(ConsumptionEntryError(error.toString())),
+      cancelOnError: true,
+    );
   }
 
-  final _entriesController =
-      StreamController<List<ConsumptionEntry>>.broadcast();
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  final _consumptionEntries = <ConsumptionEntry>[
-    ConsumptionEntry(kilometers: 86606, litres: 15.28, petrolPrice: 21.85),
-    ConsumptionEntry(kilometers: 86882, litres: 18.82, petrolPrice: 25.45),
-    ConsumptionEntry(kilometers: 87150, litres: 12.32, petrolPrice: 15.24),
-
-  ];
-
-  Stream<List<ConsumptionEntry>> get stream => _entriesController.stream;
-
-  List<ConsumptionEntry> all() => UnmodifiableListView(_consumptionEntries);
+  List<ConsumptionEntry> all() => UnmodifiableListView([
+        ConsumptionEntry(
+          distance: 0,
+          volume: 0,
+          petrolPrice: 0,
+        )
+      ]);
 
   addEntry(ConsumptionEntry entry) {
-    _consumptionEntries.add(entry);
-    emitEntries();
+//    _consumptionEntries.add(entry);
+//    ConsumptionEntryData(entries);
+    print('add entries');
   }
 
   deleteEntry(ConsumptionEntry entry) {
-    _consumptionEntries.remove(entry);
-    emitEntries();
+//    _consumptionEntries.remove(entry);
+//    ConsumptionEntryData(entries);
+    print('remove entries');
   }
 
-  emitEntries() {
-    _entriesController.add(UnmodifiableListView(_consumptionEntries));
-  }
+//  emitEntries(List<ConsumptionEntry> entries) {
+//    _entriesController.add(UnmodifiableListView(entries));
+//  }
 
-  @override
-  Future<void> close() {
-    _entriesController.close();
-    return super.close();
-  }
+//  @override
+//  Future<void> close() {
+//    _entriesController.close();
+//    return super.close();
+//  }
 }

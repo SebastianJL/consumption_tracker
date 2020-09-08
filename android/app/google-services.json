@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "919255031987",
+    "firebase_url": "https://consumption-tracker-app-db.firebaseio.com",
+    "project_id": "consumption-tracker-app-db",
+    "storage_bucket": "consumption-tracker-app-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919255031987:android:cb645984c6074943c710c6",
+        "android_client_info": {
+          "package_name": "ch.example.consumption_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919255031987-cq4i0oi14s9iibdeillvi13qfoc0kr72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAK7c5m6VXnsRW3ZPGNo2mM31lk5qCJRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919255031987-cq4i0oi14s9iibdeillvi13qfoc0kr72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

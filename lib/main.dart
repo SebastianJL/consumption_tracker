@@ -1,22 +1,36 @@
 import 'package:consumption_tracker/src/consumption_entry_cubit.dart';
 import 'package:consumption_tracker/src/overview_tab.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:consumption_tracker/src/charts_tab.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ConsumptionTracker());
 }
 
 class ConsumptionTracker extends StatelessWidget {
+  var _firebaseInit = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocProvider(
-        create: (context) => ConsumptionEntryCubit(),
-        child: HomePage(),
-      ),
-    );
+    return FutureBuilder(
+        future: _firebaseInit,
+        builder: (context, snapshot) {
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MaterialApp(
+              home: BlocProvider(
+                create: (context) => ConsumptionEntryCubit(),
+                child: HomePage(),
+              ),
+            );
+          }
+
+          return MaterialApp(home: Center(child: Text('Loading')));
+
+        });
   }
 }
 

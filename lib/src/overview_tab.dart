@@ -31,39 +31,39 @@ class _OverviewTabState extends State<OverviewTab>
 class ConsumptionEntryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ConsumptionEntryCubit consumptionEntryCubit =
-        BlocProvider.of<ConsumptionEntryCubit>(context);
-    return StreamBuilder(
-      stream: consumptionEntryCubit.stream,
-      builder: (context, snapshot) {
+    return BlocBuilder<ConsumptionEntryCubit, ConsumptionEntryState>(
+      builder: (context, state) {
         UnmodifiableListView<ConsumptionEntry> consumptionEntries;
-        if (!snapshot.hasData) {
-          consumptionEntries = consumptionEntryCubit.all();
+        if (state is ConsumptionEntryData) {
+          consumptionEntries = state.entries;
+          if (consumptionEntries.isEmpty) {
+            return Center(child: Text('NoData'));
+          }
+          return ListView.builder(
+            itemCount: consumptionEntries.length,
+            itemBuilder: (context, index) {
+              final entry = consumptionEntries[index];
+              return Dismissible(
+                key: GlobalKey(),
+                child: ListTile(
+                  title: Text(
+                      '${entry.distance}km, ${entry.volume}L, ${entry.petrolPrice}Fr'),
+                  subtitle: Text('${entry.date}'),
+                  trailing: Icon(Icons.delete_sweep),
+                ),
+                onDismissed: (direction) =>
+                    BlocProvider.of<ConsumptionEntryCubit>(context)
+                        .deleteEntry(entry),
+                direction: DismissDirection.endToStart,
+                background: Container(color: Colors.red),
+              );
+            },
+          );
+        } else if (state is ConsumptionEntryError) {
+          return Center(child: Text('Error: ${state.message}'));
         } else {
-          consumptionEntries = snapshot.data;
+          return Center(child: Text('Error: unknown'));
         }
-        if (consumptionEntries.isEmpty) {
-          return Center(child: Text('NoData'));
-        }
-        return ListView.builder(
-          itemCount: consumptionEntries.length,
-          itemBuilder: (context, index) {
-            final entry = consumptionEntries[index];
-            return Dismissible(
-              key: GlobalKey(),
-              child: ListTile(
-                title: Text(
-                    '${entry.kilometers}km, ${entry.litres}L, ${entry.petrolPrice}Fr'),
-                subtitle: Text('${entry.date}'),
-                trailing: Icon(Icons.delete_sweep),
-              ),
-              onDismissed: (direction) =>
-                  consumptionEntryCubit.deleteEntry(entry),
-              direction: DismissDirection.endToStart,
-              background: Container(color: Colors.red),
-            );
-          },
-        );
       },
     );
   }

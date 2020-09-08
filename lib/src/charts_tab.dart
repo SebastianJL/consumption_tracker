@@ -18,14 +18,11 @@ class ChartsTab extends StatelessWidget {
     return Padding(
       padding:
           const EdgeInsets.only(right: 18.0, left: 12.0, top: 24, bottom: 12),
-      child: StreamBuilder(
-        stream: consumptionEntryCubit.stream,
-        builder: (context, snapshot) {
+      child: BlocBuilder<ConsumptionEntryCubit, ConsumptionEntryState>(
+        builder: (context, state) {
           List<ConsumptionEntry> data;
-          if (!snapshot.hasData) {
-            data = consumptionEntryCubit.all();
-          } else {
-            data = snapshot.data;
+          if (state is ConsumptionEntryData) {
+            data = state.entries;
           }
           if (data.isEmpty) return Center(child: Text('No Data'));
           return LineChart(createData(data));
@@ -53,9 +50,8 @@ class ChartsTab extends StatelessWidget {
         },
       ),
       axisTitleData: FlAxisTitleData(
-        bottomTitle: AxisTitle(showTitle:true, titleText: 'km'),
-leftTitle: AxisTitle(showTitle: true, titleText: 'L')
-      ),
+          bottomTitle: AxisTitle(showTitle: true, titleText: 'km'),
+          leftTitle: AxisTitle(showTitle: true, titleText: 'L')),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
@@ -87,7 +83,9 @@ leftTitle: AxisTitle(showTitle: true, titleText: 'L')
 //      maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: data.map((e) => FlSpot(e.kilometers, e.litres)).toList(),
+          spots: data
+              .map((e) => FlSpot(e.distance.toDouble(), e.volume.toDouble()))
+              .toList(),
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,

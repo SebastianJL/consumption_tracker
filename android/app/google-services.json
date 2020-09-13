@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:919255031987:android:cb645984c6074943c710c6",
         "android_client_info": {
-          "package_name": "ch.example.consumption_tracker"
+          "package_name": "com.johanneslade.consumption_tracker"
         }
       },
       "oauth_client": [

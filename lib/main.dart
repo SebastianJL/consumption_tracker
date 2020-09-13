@@ -21,6 +21,7 @@ class ConsumptionTracker extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
+              theme: ThemeData(primaryColor: Colors.pinkAccent),
               home: BlocProvider(
                 create: (context) => ConsumptionEntryCubit(),
                 child: HomePage(),

@@ -1,4 +1,4 @@
-package ch.example.consumption_tracker
+package com.johanneslade.consumption_tracker
 
 import io.flutter.embedding.android.FlutterActivity
 

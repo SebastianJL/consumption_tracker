@@ -22,11 +22,18 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.7.3
+  flutter_native_splash: ^0.1.9
 
 flutter_icons:
-  android: true
+  android: false
   ios: false
   image_path: "assets/icons8-odometer-100.png"
+
+flutter_native_splash:
+  image: 'assets/splash.png'
+  color: "#FFF50057"
+  fill: true
+  ios: false
 
 flutter:
   uses-material-design: true

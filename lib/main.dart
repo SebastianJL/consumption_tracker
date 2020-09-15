@@ -47,12 +47,17 @@ class HomePage extends StatelessWidget {
               Container(
                 color: Theme.of(context).primaryColor,
                 child: DrawerHeader(
-                  child: Text(
-                    appName,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                  child: Row(
+                    children: [
+                      Image.asset('assets/icons8-odometer-100.png'),
+                      Text(
+                        appName,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

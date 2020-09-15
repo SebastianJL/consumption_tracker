@@ -1,16 +1,22 @@
-# consumption_tracker
+<img align="left" src="assets/icons8-odometer-100.png" alt="app icon">
+
+# ConsumptionTracker
 
 Track the gas consumption of your vehicle.
 
-## Getting Started
+## Available platforms
 
-This project is a starting point for a Flutter application.
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg" width="100">
 
-A few resources to get you started if this is your first Flutter project:
+## Develop
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+If you want to develop on the app yourself you need to do the following:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* [Install flutter](https://flutter.dev/docs/get-started/install).
+* Install AndroidStudio or VSCode and the respective [dart and flutter plugins](https://flutter.dev/docs/get-started/editor).
+* Import the project from github and get going!
+* More resources on [flutter development](https://flutter.dev).
+
+## Acknowledgements
+* This project is developed using google's [flutter](https://flutter.dev/) framework.
+* The app icon is provided by [Icons8](https://icons8.com/icons/set/odometer).

@@ -47,20 +47,34 @@ class HomePage extends StatelessWidget {
               Container(
                 color: Theme.of(context).primaryColor,
                 child: DrawerHeader(
-                  child: Row(
+                  child: Column(
                     children: [
-                      Image.asset('assets/icons8-odometer-100.png'),
-                      Text(
-                        appName,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Theme.of(context).colorScheme.onPrimary,
+                      Expanded(
+                          child: Image.asset(
+                              'assets/icons8-odometer-white-100.png')),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          appName,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
+              ListTile(
+                leading: Icon(Icons.motorcycle),
+                title: Text('Vehicle 1'),
+              ),
+              ListTile(
+                leading: Icon(Icons.directions_car),
+                title: Text('Vehicle 2'),
+              ),
+              Divider(),
               AboutListTile(
                 child: Text('About'),
                 icon: Icon(Icons.info_outline),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:consumption_tracker/src/charts_tab.dart';
 
-const appName = 'ConsumptionTracker';
+const appName = 'Consumption Tracker';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,8 +76,8 @@ class AppDrawer extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                      child: Image.asset(
-                          'assets/icons8-odometer-white-100.png')),
+                      child:
+                          Image.asset('assets/icons8-odometer-white-100.png')),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -106,7 +106,9 @@ class AppDrawer extends StatelessWidget {
             icon: Icon(Icons.info_outline),
             applicationName: appName,
             dense: false,
-            applicationIcon: Image.asset("assets/icons8-odometer-50.png"),
+            applicationIcon: SizedBox(
+                width: 90,
+                child: Image.asset("assets/icons8-odometer-100.png")),
             aboutBoxChildren: [
               Text('App icon provided by Icons8, see https://icons8.com')
             ],

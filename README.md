@@ -1,6 +1,6 @@
 <img align="left" src="assets/icons8-odometer-100.png" alt="app icon">
 
-# ConsumptionTracker
+# Consumption Tracker
 
 Track the gas consumption of your vehicle.
 

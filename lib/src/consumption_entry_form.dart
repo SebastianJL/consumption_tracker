@@ -28,23 +28,23 @@ class ConsumptionEntryFormState extends State<ConsumptionEntryForm> {
                   decoration: InputDecoration(hintText: 'km'),
                   keyboardType: TextInputType.number,
                   validator: (value) => validateNumeric(value),
-                  onSaved: (newValue) => _entry['km'] = double.parse(newValue),
+                  onSaved: (newValue) => _entry['distance'] = double.parse(newValue),
                 ),
               ),
               Expanded(
                 child: TextFormField(
-                  decoration: InputDecoration(hintText: 'L'),
+                  decoration: InputDecoration(hintText: 'l'),
                   keyboardType: TextInputType.number,
                   validator: (value) => validateNumeric(value),
-                  onSaved: (newValue) => _entry['L'] = double.parse(newValue),
+                  onSaved: (newValue) => _entry['volume'] = double.parse(newValue),
                 ),
               ),
               Expanded(
                 child: TextFormField(
-                  decoration: InputDecoration(hintText: 'Fr'),
+                  decoration: InputDecoration(hintText: 'CHF'),
                   keyboardType: TextInputType.number,
                   validator: (value) => validateNumeric(value),
-                  onSaved: (newValue) => _entry['Fr'] = double.parse(newValue),
+                  onSaved: (newValue) => _entry['petrolPrice'] = double.parse(newValue),
                 ),
               ),
             ]),
@@ -64,9 +64,9 @@ class ConsumptionEntryFormState extends State<ConsumptionEntryForm> {
                   if (state.validate()) {
                     state.save();
                     var entry = ConsumptionEntry(
-                      distance: _entry['km'],
-                      volume: _entry['L'],
-                      petrolPrice: _entry['Fr'],
+                      distance: _entry['distance'],
+                      volume: _entry['volume'],
+                      petrolPrice: _entry['petrolPrice'],
                       date: _entry['date'],
                     );
                     BlocProvider.of<ConsumptionEntryCubit>(context)

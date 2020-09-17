@@ -5,6 +5,7 @@ import 'package:consumption_tracker/src/consumption_entry.dart';
 import 'package:consumption_tracker/src/consumption_entry_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class OverviewTab extends StatefulWidget {
   @override
@@ -29,6 +30,9 @@ class _OverviewTabState extends State<OverviewTab>
 }
 
 class ConsumptionEntryList extends StatelessWidget {
+  final distanceFormat = NumberFormat('###,###km');
+  final pricePerLiterFormat = NumberFormat('#0.00 CHF/l');
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ConsumptionEntryCubit, ConsumptionEntryState>(
@@ -46,9 +50,10 @@ class ConsumptionEntryList extends StatelessWidget {
               return Dismissible(
                 key: GlobalKey(),
                 child: ListTile(
-                  title: Text(
-                      '${entry.distance}km, ${entry.volume}L, ${entry.petrolPrice}Fr'),
-                  subtitle: Text('${entry.date}'),
+                  title: Text('${distanceFormat.format(entry.distance)}'),
+                  subtitle: Text(
+                    '${pricePerLiterFormat.format(entry.petrolPrice / entry.volume)}',
+                  ),
                   trailing: Icon(Icons.delete_sweep),
                 ),
                 confirmDismiss: (_) => showDialog(

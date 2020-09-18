@@ -32,6 +32,7 @@ class _OverviewTabState extends State<OverviewTab>
 class ConsumptionEntryList extends StatelessWidget {
   final distanceFormat = NumberFormat('###,###km');
   final pricePerLiterFormat = NumberFormat('#0.00 CHF/l');
+  final litersPer100KmFormat = NumberFormat("#0.0 l/1'00'km");
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +48,16 @@ class ConsumptionEntryList extends StatelessWidget {
             itemCount: consumptionEntries.length,
             itemBuilder: (context, index) {
               final entry = consumptionEntries[index];
+              final previous = (index < consumptionEntries.length - 1)
+                  ? consumptionEntries[index + 1]
+                  : null;
               return Dismissible(
                 key: GlobalKey(),
                 child: ListTile(
                   title: Text('${distanceFormat.format(entry.distance)}'),
                   subtitle: Text(
-                    '${pricePerLiterFormat.format(entry.petrolPrice / entry.volume)}',
+                    '${pricePerLiterFormat.format(entry.pricePerLiter)}    '
+                    '${litersPer100KmFormat.format(entry.litersPer100Km(previous))}',
                   ),
                   trailing: Icon(Icons.delete_sweep),
                 ),

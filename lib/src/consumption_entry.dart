@@ -8,12 +8,11 @@ class ConsumptionEntry {
   final DateTime date;
   final String id;
 
-  ConsumptionEntry(
-      {@required this.distance,
-      @required this.volume,
-      @required this.petrolPrice,
-      this.date,
-      this.id});
+  ConsumptionEntry({@required this.distance,
+    @required this.volume,
+    @required this.petrolPrice,
+    this.date,
+    this.id});
 
   factory ConsumptionEntry.fromSnapshot(QueryDocumentSnapshot element) {
     var data = element.data();
@@ -33,5 +32,14 @@ class ConsumptionEntry {
       'petrolPrice': petrolPrice,
       'date': date,
     };
+  }
+
+  double get pricePerLiter => petrolPrice / volume;
+
+  double litersPer100Km(ConsumptionEntry previous) {
+    if (previous == null) {
+      return 0;
+    }
+    return volume / (distance - previous.distance) * 100;
   }
 }

@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChartsTab extends StatelessWidget {
   static const List<Color> gradientColors = <Color>[
-    Color(0xff23b6e6),
-    Color(0xff02d39a),
+    Colors.blue,
+    Colors.pinkAccent,
   ];
 
   @override
@@ -30,17 +30,13 @@ class ChartsTab extends StatelessWidget {
   }
 
   LineChartData createData(List<ConsumptionEntry> data) {
+    final textStyle = const TextStyle(
+        color: Color(0xff68737d), fontWeight: FontWeight.bold, fontSize: 16);
     return LineChartData(
       gridData: FlGridData(
         show: true,
-        drawVerticalLine: true,
+        drawVerticalLine: false,
         getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-        getDrawingVerticalLine: (value) {
           return FlLine(
             color: const Color(0xff37434d),
             strokeWidth: 1,
@@ -48,26 +44,22 @@ class ChartsTab extends StatelessWidget {
         },
       ),
       axisTitleData: FlAxisTitleData(
-          bottomTitle: AxisTitle(showTitle: true, titleText: 'km'),
-          leftTitle: AxisTitle(showTitle: true, titleText: 'l/100km')),
+          bottomTitle:
+              AxisTitle(showTitle: true, titleText: 'km', textStyle: textStyle),
+          leftTitle: AxisTitle(
+              showTitle: true, titleText: 'l/100km', textStyle: textStyle)),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
           showTitles: true,
+          interval: 1000,
           reservedSize: 22,
-          textStyle: const TextStyle(
-              color: Color(0xff68737d),
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
+          textStyle: textStyle,
           margin: 8,
         ),
         leftTitles: SideTitles(
           showTitles: true,
-          textStyle: const TextStyle(
-            color: Color(0xff67727d),
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
+          textStyle: textStyle,
           reservedSize: 28,
           margin: 12,
         ),
@@ -78,12 +70,13 @@ class ChartsTab extends StatelessWidget {
 //      minX: 0,
 //      maxX: 11,
       minY: 0,
-     maxY: 10,
+      maxY: 10,
       lineBarsData: [
         LineChartBarData(
           spots: [
-            for (int i = 0; i < data.length-1; i++)
-              FlSpot(data[i].distance.toDouble(), data[i].litersPer100Km(data[i + 1]))
+            for (int i = 0; i < data.length - 1; i++)
+              FlSpot(data[i].distance.toDouble(),
+                  data[i].litersPer100Km(data[i + 1]))
           ],
           isCurved: true,
           colors: gradientColors,

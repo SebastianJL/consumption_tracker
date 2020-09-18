@@ -49,7 +49,7 @@ class ChartsTab extends StatelessWidget {
       ),
       axisTitleData: FlAxisTitleData(
           bottomTitle: AxisTitle(showTitle: true, titleText: 'km'),
-          leftTitle: AxisTitle(showTitle: true, titleText: 'L')),
+          leftTitle: AxisTitle(showTitle: true, titleText: 'l/100km')),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
@@ -78,12 +78,13 @@ class ChartsTab extends StatelessWidget {
 //      minX: 0,
 //      maxX: 11,
       minY: 0,
-//      maxY: 6,
+     maxY: 10,
       lineBarsData: [
         LineChartBarData(
-          spots: data
-              .map((e) => FlSpot(e.distance.toDouble(), e.volume.toDouble()))
-              .toList(),
+          spots: [
+            for (int i = 0; i < data.length-1; i++)
+              FlSpot(data[i].distance.toDouble(), data[i].litersPer100Km(data[i + 1]))
+          ],
           isCurved: true,
           colors: gradientColors,
           barWidth: 5,

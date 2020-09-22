@@ -18,6 +18,7 @@ dependencies:
   firebase_core: 0.5.0
   cloud_firestore: ^0.14.0+2
   intl: ^0.16.1
+  implicitly_animated_reorderable_list: ^0.2.3
 
 dev_dependencies:
   flutter_test:

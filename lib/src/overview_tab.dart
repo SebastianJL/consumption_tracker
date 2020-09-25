@@ -20,7 +20,10 @@ class _OverviewTabState extends State<OverviewTab>
     super.build(context);
     return Column(
       children: [
-        ConsumptionEntryForm(),
+        Container(
+          padding: const EdgeInsets.all(8),
+          child: ConsumptionEntryForm(),
+        ),
         Expanded(
           child: BlocBuilder<ConsumptionEntryCubit, ConsumptionEntryState>(
             builder: (context, state) {

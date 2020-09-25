@@ -6,10 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChartsTab extends StatelessWidget {
-  static const List<Color> gradientColors = <Color>[
-    Colors.blue,
-    Colors.pinkAccent,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +19,19 @@ class ChartsTab extends StatelessWidget {
             data = state.entries;
           }
           if (data.isEmpty) return Center(child: Text('No Data'));
-          return LineChart(createData(data));
+          return LineChart(createData(context, data));
         },
       ),
     );
   }
 
-  LineChartData createData(List<ConsumptionEntry> data) {
+  LineChartData createData(BuildContext context, List<ConsumptionEntry> data) {
     final textStyle = const TextStyle(
         color: Color(0xff68737d), fontWeight: FontWeight.bold, fontSize: 16);
+    final List<Color> gradientColors = <Color>[
+      Theme.of(context).accentColor,
+      Theme.of(context).primaryColor,
+    ];
     return LineChartData(
       gridData: FlGridData(
         show: true,

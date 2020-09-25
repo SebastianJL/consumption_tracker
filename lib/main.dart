@@ -15,23 +15,38 @@ void main() {
 class ConsumptionTracker extends StatelessWidget {
   final _firebaseInit = Firebase.initializeApp();
 
+  final appTheme =  ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.pink,
+        primaryColor: Colors.pinkAccent,
+        accentColor: Colors.lightBlue,
+        errorColor: Colors.amber,
+        buttonTheme: ButtonThemeData(
+          splashColor: Colors.lightBlue,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        cardTheme: CardTheme(
+          elevation: 3,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _firebaseInit,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return MaterialApp(
-              theme: ThemeData(primaryColor: Colors.pinkAccent),
-              home: BlocProvider(
-                create: (context) => ConsumptionEntryCubit(),
-                child: HomePage(),
-              ),
-            );
-          }
-
-          return MaterialApp(home: Center(child: Text('Loading')));
-        });
+    return MaterialApp(
+        theme: appTheme,
+        home: FutureBuilder(
+            future: _firebaseInit,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return BlocProvider(
+                  create: (context) => ConsumptionEntryCubit(),
+                  child: HomePage(),
+                );
+              } else {
+                return Center(child: Text('Initializing Firebase.'));
+              }
+            }));
   }
 }
 

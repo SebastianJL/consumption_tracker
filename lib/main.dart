@@ -1,9 +1,9 @@
+import 'package:consumption_tracker/src/charts_tab.dart';
 import 'package:consumption_tracker/src/consumption_entry_cubit.dart';
 import 'package:consumption_tracker/src/overview_tab.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:consumption_tracker/src/charts_tab.dart';
 
 const appName = 'Consumption Tracker';
 
@@ -15,21 +15,21 @@ void main() {
 class ConsumptionTracker extends StatelessWidget {
   final _firebaseInit = Firebase.initializeApp();
 
-  final appTheme =  ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.pink,
-        primaryColor: Colors.pinkAccent,
-        accentColor: Colors.lightBlue,
-        errorColor: Colors.amber,
-        buttonTheme: ButtonThemeData(
-          splashColor: Colors.lightBlue,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        ),
-        cardTheme: CardTheme(
-          elevation: 3,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        ),
-      );
+  final appTheme = ThemeData(
+    brightness: Brightness.light,
+    primarySwatch: Colors.pink,
+    primaryColor: Colors.pinkAccent,
+    accentColor: Colors.lightBlue,
+    errorColor: Colors.amber,
+    buttonTheme: ButtonThemeData(
+      splashColor: Colors.lightBlue,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+    cardTheme: CardTheme(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {

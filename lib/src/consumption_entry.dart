@@ -8,11 +8,12 @@ class ConsumptionEntry {
   final DateTime date;
   final String id;
 
-  ConsumptionEntry({@required this.distance,
-    @required this.volume,
-    @required this.petrolPrice,
-    this.date,
-    this.id});
+  ConsumptionEntry(
+      {@required this.distance,
+      @required this.volume,
+      @required this.petrolPrice,
+      this.date,
+      this.id});
 
   factory ConsumptionEntry.fromSnapshot(QueryDocumentSnapshot element) {
     var data = element.data();

@@ -1,8 +1,8 @@
 import 'dart:collection';
 
-import 'package:consumption_tracker/src/consumption_entry_form.dart';
 import 'package:consumption_tracker/src/consumption_entry.dart';
 import 'package:consumption_tracker/src/consumption_entry_cubit.dart';
+import 'package:consumption_tracker/src/consumption_entry_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';

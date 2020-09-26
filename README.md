@@ -5,7 +5,7 @@
 Track the gas consumption of your vehicle.
 
 ## Screenshots (debug version)
-| <img src="assets/screenshots/Screenshot_1600176457.png" alt="screenshot 1" width="300"> | <img src="assets/screenshots/Screenshot_1600176594.png" alt="screenshot 2" width="300"> | 
+| <img src="assets/screenshots/Screenshot_20200926-071006.png" alt="screenshot 1" width="300"> | <img src="assets/screenshots/Screenshot_20200926-071020.png" alt="screenshot 2" width="300"> | 
 | --- | --- |
 
 ## Available platforms
